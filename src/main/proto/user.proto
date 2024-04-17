@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package grpc;
+
+option java_package = "com.example.grpc.services.user";
+option java_outer_classname = "UserProto";
+
+import "empty.proto";
+import "wrappers.proto";
+
+service UsersService {
+    rpc findById (google.protobuf.StringValue) returns (User);
+    rpc findByUserName (google.protobuf.StringValue) returns (User);
+    rpc findAll (google.protobuf.Empty) returns (Users);
+    rpc addUser (User) returns (User);
+    rpc updateUserName (UpdateUserNameDTO) returns (google.protobuf.Empty);
+    rpc deleteUser (google.protobuf.StringValue) returns (google.protobuf.Empty);
+}
+
+message User {
+    string id = 1;
+    string userName = 2;
+}
+
+message UpdateUserNameDTO {
+    string id = 1;
+    string userName = 2;
+}
+
+message Users {
+    repeated User users = 1;
+}
